@@ -24,3 +24,11 @@ body {
     text-wrap: balance;
   }
 }
+
+
+@layer components {
+  body {
+    background: #191f24;
+    color: rgb(192, 196, 199);
+  }
+}
