@@ -1,6 +1,7 @@
+// src/app/layout.js
+import { Navbar } from "@/components";
+import { images } from "@/data";
 import { Merriweather } from "next/font/google";
-import { Navbar } from "../components";
-import { images } from "../data";
 import "../styles/globals.css";
 
 const merriweather = Merriweather({
@@ -30,7 +31,7 @@ export default function RootLayout({ children }) {
           navItems={[
             { label: "Home", href: "/" },
             { label: "Blog", href: "/about" },
-            { label: "Protesters", href: "/services" },
+            { label: "Protesters", href: "/protesters" },
             { label: "Contribute", href: "/contribute" },
             { label: "Contact", href: "/contact" },
           ]}
