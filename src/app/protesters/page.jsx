@@ -1,7 +1,5 @@
 const Protesters = () => {
-  return (
-    <div>Protesters</div>
-  )
-}
+  return <div>Protesters</div>;
+};
 
-export default Protesters
+export default Protesters;

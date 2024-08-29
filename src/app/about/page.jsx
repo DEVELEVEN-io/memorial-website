@@ -1,7 +1,5 @@
 const Contribute = () => {
-  return (
-    <div>Contribute</div>
-  )
-}
+  return <div>Contribute</div>;
+};
 
-export default Contribute
+export default Contribute;
