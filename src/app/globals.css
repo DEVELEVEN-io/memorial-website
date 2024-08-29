@@ -16,19 +16,15 @@
   }
 }
 
-body {
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
 
-
 @layer components {
   body {
-    background: #191f24;
+    @apply bg-slate-50;
     color: rgb(192, 196, 199);
   }
 }
