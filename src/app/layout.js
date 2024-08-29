@@ -1,7 +1,8 @@
+// src/app/layout.js
+import { Navbar } from "@/components";
+import { images } from "@/data";
 import { Merriweather } from "next/font/google";
-import { Navbar } from "../components";
-import { images } from "../data";
-import "./globals.css";
+import "../styles/globals.css";
 
 const merriweather = Merriweather({
   weight: ["300", "400", "700", "900"],
@@ -22,22 +23,21 @@ export default function RootLayout({ children }) {
       <body className={merriweather.className}>
         <Navbar
           brand={{
-            name: "utsx",
+            name: "BD Heros",
             logoSrc: images.logo,
             logoAlt: "Logo",
             href: "/",
           }}
           navItems={[
             { label: "Home", href: "/" },
-            { label: "Blog", href: "/about" },
-            { label: "Protesters", href: "/services" },
+            { label: "Protesters", href: "/protesters" },
             { label: "Contribute", href: "/contribute" },
-            { label: "Contact", href: "/contact" },
+            { label: "Contact", href: "/about" },
           ]}
           userMenuItems={[
-            { label: "Dashboard", href: "/navbar" },
-            { label: "Settings", href: "/navbar" },
-            { label: "Sign out", href: "/navbar" },
+            { label: "Dashboard", href: "/dashboard" },
+            { label: "Settings", href: "/settings" },
+            { label: "Sign out", href: "/signout" },
           ]}
           showSearchBar={true}
           userInfo={{
