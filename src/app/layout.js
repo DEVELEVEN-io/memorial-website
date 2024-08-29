@@ -1,4 +1,4 @@
-import { Merriweather, Open_Sans } from "next/font/google";
+import { Merriweather } from "next/font/google";
 import { Navbar } from "../components";
 import { images } from "../data";
 import "./globals.css";
@@ -16,6 +16,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href={images.icon} sizes="any" />
+      </head>
       <body className={merriweather.className}>
         <Navbar
           brand={{
