@@ -105,6 +105,7 @@ export const DataTable: React.FC<DataTableProps> = ({
                 {column.label}
               </th>
             ))}
+            <th className="px-6 py-3">Actions</th>
           </tr>
         </thead>
         <tbody>
