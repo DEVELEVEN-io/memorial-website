@@ -1,7 +1,7 @@
 import { Merriweather } from "next/font/google";
 import { Navbar } from "../components";
 import { images } from "../data";
-import "./globals.css";
+import "../styles/globals.css";
 
 const merriweather = Merriweather({
   weight: ["300", "400", "700", "900"],
