@@ -1,0 +1,156 @@
+/* src/styles/editor.css */
+.editor-container .tiptap-editor {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.editor-container .control-group {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.editor-container .button-group {
+  display: flex;
+  gap: 5px;
+}
+
+.editor-container .button-group button {
+  background-color: #353a46;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.editor-container .button-group button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.editor-container .button-group button.is-active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.editor-container .EditorContent {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+/* General styles for lists */
+.editor-container ol,
+.editor-container ul {
+  margin: 0;
+  padding-left: 1.5em;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Ordered list styles */
+.editor-container ol {
+  list-style-type: decimal;
+}
+
+/* Unordered list styles */
+.editor-container ul {
+  list-style-type: disc;
+}
+
+/* Nested lists */
+.editor-container ol ol,
+.editor-container ul ul,
+.editor-container ol ul,
+.editor-container ul ol {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 1.5em;
+}
+
+/* Change marker color */
+.editor-container ol li::marker,
+.editor-container ul li::marker {
+  color: #007bff;
+}
+
+/* Custom bullet for unordered lists */
+.editor-container ul.custom-bullets {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.editor-container ul.custom-bullets li {
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.editor-container ul.custom-bullets li::before {
+  content: "•";
+  color: #ff6347;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+}
+
+/* Numbered list style for ordered lists */
+.editor-container ol.custom-numbers {
+  list-style-type: none;
+  counter-reset: my-counter;
+  padding-left: 0;
+}
+
+.editor-container ol.custom-numbers li {
+  counter-increment: my-counter;
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.editor-container ol.custom-numbers li::before {
+  content: counter(my-counter) ".";
+  color: #007bff;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+}
+
+/* Hover effects */
+.editor-container ol li:hover,
+.editor-container ul li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+
+  .editor-container ol,
+  .editor-container ul {
+    color: #e5e5e5;
+  }
+
+  .editor-container ol li::marker,
+  .editor-container ul li::marker {
+    color: #5d9bfc;
+  }
+
+  .editor-container ol.custom-numbers li::before {
+    color: #5d9bfc;
+  }
+
+  .editor-container ul.custom-bullets li::before {
+    color: #ff6f61;
+  }
+
+  .editor-container ol li:hover,
+  .editor-container ul li:hover {
+    background-color: #333;
+  }
+}

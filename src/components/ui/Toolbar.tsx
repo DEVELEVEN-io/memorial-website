@@ -1,3 +1,5 @@
+// src/components/ui/Toolbar.tsx
+import "@/styles/editor.css";
 import { useState } from "react";
 import {
   FaBold,
