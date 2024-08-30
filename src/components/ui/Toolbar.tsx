@@ -1,21 +1,35 @@
 import "@/styles/editor.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FaBold,
   FaChevronDown,
+  FaHighlighter,
   FaItalic,
   FaLink,
   FaList,
+  FaPalette,
   FaUnderline,
 } from "react-icons/fa";
+
+import {
+  LuHeading1,
+  LuHeading2,
+  LuHeading3,
+  LuList,
+  LuListOrdered,
+  LuPilcrow,
+} from "react-icons/lu";
 
 const Toolbar = ({ editor }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
   const [linkUrl, setLinkUrl] = useState("");
   const [openInNewTab, setOpenInNewTab] = useState(false);
+  const linkModalRef = useRef(null); // Ref for the link modal
 
-  if (!editor) return null;
+  useEffect(() => {
+    if (!editor) return;
+  }, [editor]);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
@@ -48,6 +62,28 @@ const Toolbar = ({ editor }) => {
     setOpenInNewTab(false);
   };
 
+  // Close the link modal if clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        linkModalRef.current &&
+        !linkModalRef.current.contains(event.target)
+      ) {
+        setIsLinkModalOpen(false);
+      }
+    };
+
+    if (isLinkModalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isLinkModalOpen]);
+
   return (
     <div className="flex items-center space-x-2 rounded-t-md bg-gray-200 p-2 dark:bg-gray-800">
       <div className="relative">
@@ -61,39 +97,39 @@ const Toolbar = ({ editor }) => {
           <div className="absolute z-10 mt-2 w-48 rounded-md border border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-700">
             <button
               onClick={() => applyHeading(1)}
-              className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
+              className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
-              Heading 1
+              <LuHeading1 className="mr-2 text-xl" /> Heading 1
             </button>
             <button
               onClick={() => applyHeading(2)}
-              className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
+              className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
-              Heading 2
+              <LuHeading2 className="mr-2 text-xl" /> Heading 2
             </button>
             <button
               onClick={() => applyHeading(3)}
-              className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
+              className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
-              Heading 3
+              <LuHeading3 className="mr-2 text-xl" /> Heading 3
             </button>
             <button
               onClick={() => applyList("bullet")}
-              className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
+              className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
-              Bullet list
+              <LuList className="mr-2 text-xl" /> Bullet list
             </button>
             <button
               onClick={() => applyList("ordered")}
-              className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
+              className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
-              Numbered list
+              <LuListOrdered className="mr-2 text-xl" /> Numbered list
             </button>
             <button
               onClick={() => applyList("paragraph")}
-              className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
+              className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
-              Paragraph
+              <LuPilcrow className="mr-2 text-xl" /> Paragraph
             </button>
           </div>
         )}
@@ -125,26 +161,34 @@ const Toolbar = ({ editor }) => {
       </button>
 
       {/* Color Picker */}
-      <input
-        type="color"
-        onChange={(e) => editor.chain().focus().setColor(e.target.value).run()}
-        className="rounded-md p-2"
-        title="Text Color"
-      />
+      <div className="flex w-10 flex-row items-center justify-center">
+        <FaPalette className="pointer-events-none absolute mx-4" />
+        <input
+          type="color"
+          onChange={(e) =>
+            editor.chain().focus().setColor(e.target.value).run()
+          }
+          className="cursor-pointer rounded-md px-[5px] pt-[11px]"
+          title="Text Color"
+        />
+      </div>
 
       {/* Highlight Picker */}
-      <input
-        type="color"
-        onChange={(e) =>
-          editor
-            .chain()
-            .focus()
-            .toggleHighlight({ color: e.target.value })
-            .run()
-        }
-        className="rounded-md p-2"
-        title="Text Highlight"
-      />
+      <div className="flex w-10 flex-row items-center justify-center">
+        <FaHighlighter className="pointer-events-none absolute mx-4" />
+        <input
+          type="color"
+          onChange={(e) =>
+            editor
+              .chain()
+              .focus()
+              .toggleHighlight({ color: e.target.value })
+              .run()
+          }
+          className="cursor-pointer rounded-md px-[5px] pt-[11px]"
+          title="Text Highlight"
+        />
+      </div>
 
       <button
         onClick={() => setIsLinkModalOpen(true)}
@@ -155,14 +199,23 @@ const Toolbar = ({ editor }) => {
       </button>
 
       {isLinkModalOpen && (
-        <div className="absolute z-10 mt-2 w-60 rounded-md border border-gray-300 bg-white p-4 shadow-lg dark:border-gray-600 dark:bg-gray-700">
-          <input
-            type="text"
-            placeholder="Enter URL"
-            value={linkUrl}
-            onChange={(e) => setLinkUrl(e.target.value)}
-            className="mb-2 w-full rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
-          />
+        <div
+          ref={linkModalRef} // Attach ref to the modal
+          className="absolute z-10 mt-2 w-60 rounded-md border border-gray-300 bg-white p-4 shadow-lg dark:border-gray-600 dark:bg-gray-700"
+        >
+          <div className="flex flex-row">
+            <div className="mb-2 rounded-md rounded-r-none border border-r-0 border-gray-300 bg-gray-100 p-3 text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200">
+              <FaLink />
+            </div>
+            <input
+              type="text"
+              placeholder="Enter URL"
+              value={linkUrl}
+              onChange={(e) => setLinkUrl(e.target.value)}
+              className="mb-2 w-full rounded-md rounded-l-none border border-l-0 border-gray-300 bg-gray-100 p-2 text-gray-800 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
+            />
+          </div>
+
           <label className="mb-2 flex items-center space-x-2">
             <input
               type="checkbox"
