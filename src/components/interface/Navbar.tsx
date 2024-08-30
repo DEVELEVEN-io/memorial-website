@@ -16,9 +16,9 @@ interface NavbarProps {
   userMenuItems: { label: string; href: string }[];
   showSearchBar?: boolean;
   userInfo?: {
-    name: string;
-    email: string;
-    avatarSrc: string;
+    name?: string;
+    email?: string;
+    avatarSrc?: string;
   };
 }
 
@@ -27,7 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   navItems,
   userMenuItems,
   showSearchBar = false,
-  userInfo = { name: "User", email: "user@example.com", avatarSrc: "" },
+  userInfo = {},
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -109,10 +109,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <div className="px-4 py-3">
                   <span className="block text-sm text-gray-900 dark:text-white">
-                    {userInfo.name}
+                    {userInfo.name || "Guest"}
                   </span>
                   <span className="block truncate text-sm text-gray-500 dark:text-gray-400">
-                    {userInfo.email}
+                    {userInfo.email || "guest@example.com"}
                   </span>
                 </div>
                 <ul className="py-2" aria-labelledby="user-menu-button">
