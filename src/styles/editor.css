@@ -153,4 +153,10 @@
   .editor-container ul li:hover {
     background-color: #333;
   }
+
+  .editor-container a {
+    color: #5d9bfc;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
