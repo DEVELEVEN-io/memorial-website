@@ -1,14 +1,16 @@
-import { authOptions } from "@/auth/authOptions";
-import { Button } from "@/components/ui/Button";
-import { getServerSession } from "next-auth";
+// import { authOptions } from "@/auth/authOptions";
+// import { getServerSession } from "next-auth";
+import { Editor } from "@/components";
 
 export default async function Contribute() {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
   return (
     <>
-      <p>Welcome, {session?.user?.name}</p>
+      {/* <p>Welcome, {session?.user?.name}</p> */}
 
-      <Button href="/api/auth/signin" text="Login" />
+      {/* <Button href="/api/auth/signin" text="Login" /> */}
+
+      <Editor />
     </>
   );
 }
