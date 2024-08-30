@@ -27,4 +27,181 @@
     background: #262e35;
     color: rgb(210, 214, 216);
   }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  .tiptap-editor {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+
+  .control-group {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 5px;
+  }
+
+  .button-group button {
+    background-color: #353a46;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+  }
+
+  .button-group button:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .button-group button.is-active {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .EditorContent {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+  }
+
+  /* General styles for lists */
+  ol,
+  ul {
+    margin: 0;
+    padding-left: 1.5em;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Ordered list styles */
+  ol {
+    list-style-type: decimal;
+  }
+
+  /* Unordered list styles */
+  ul {
+    list-style-type: disc;
+  }
+
+  /* Nested lists */
+  ol ol,
+  ul ul,
+  ol ul,
+  ul ol {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    padding-left: 1.5em;
+  }
+
+  /* Change marker color */
+  ol li::marker,
+  ul li::marker {
+    color: #007bff;
+    /* Blue marker */
+  }
+
+  /* Custom bullet for unordered lists */
+  ul.custom-bullets {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  ul.custom-bullets li {
+    position: relative;
+    padding-left: 1.5em;
+  }
+
+  ul.custom-bullets li::before {
+    content: "•";
+    /* Custom bullet */
+    color: #ff6347;
+    /* Tomato color */
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+  }
+
+  /* Numbered list style for ordered lists */
+  ol.custom-numbers {
+    list-style-type: none;
+    counter-reset: my-counter;
+    padding-left: 0;
+  }
+
+  ol.custom-numbers li {
+    counter-increment: my-counter;
+    position: relative;
+    padding-left: 1.5em;
+  }
+
+  ol.custom-numbers li::before {
+    content: counter(my-counter) ".";
+    color: #007bff;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+  }
+
+  /* Hover effects */
+  ol li:hover,
+  ul li:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+
+    ol,
+    ul {
+      color: #e5e5e5;
+    }
+
+    ol li::marker,
+    ul li::marker {
+      color: #5d9bfc;
+    }
+
+    ol.custom-numbers li::before {
+      color: #5d9bfc;
+    }
+
+    ul.custom-bullets li::before {
+      color: #ff6f61;
+    }
+
+    ol li:hover,
+    ul li:hover {
+      background-color: #333;
+    }
+  }
+
+
 }

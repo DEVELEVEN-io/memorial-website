@@ -3,6 +3,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { FaCircleUser } from "react-icons/fa6";
 
 // Define the prop types
 interface NavbarProps {
@@ -91,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               aria-expanded={isDropdownOpen}
             >
               <span className="sr-only">Open user menu</span>
-              {userInfo.avatarSrc && (
+              {userInfo.avatarSrc ? (
                 <Image
                   className="h-8 w-8 rounded-full"
                   width={32}
@@ -99,6 +100,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   src={userInfo.avatarSrc}
                   alt="user photo"
                 />
+              ) : (
+                <FaCircleUser className="h-8 w-8 text-gray-300" />
               )}
             </button>
 

@@ -10,13 +10,11 @@ export default function NavbarWrapper({ session }: { session: any }) {
       ]
     : [{ label: "Sign in", href: "/api/auth/signin" }];
 
-  const userInfo = session?.user
-    ? [
-        { name: session?.user?.name || "Guest User" },
-        { email: session?.user?.email || "guest@example.com" },
-        { label: "Sign out", href: "/api/auth/signout" },
-      ]
-    : [{ avatarSrc: session?.user?.image || images.icon }];
+  const userInfo = {
+    name: session?.user?.name || "Guest User",
+    email: session?.user?.email || "guest@example.com",
+    avatarSrc: session?.user?.image || null, // Use images.icon as default avatar
+  };
 
   return (
     <Navbar
@@ -34,11 +32,7 @@ export default function NavbarWrapper({ session }: { session: any }) {
       ]}
       userMenuItems={userMenuItems}
       showSearchBar={true}
-      userInfo={{
-        name: session?.user?.name || "Guest User",
-        email: session?.user?.email || "guest@example.com",
-        avatarSrc: session?.user?.image || images.icon,
-      }}
+      userInfo={userInfo}
     />
   );
 }
