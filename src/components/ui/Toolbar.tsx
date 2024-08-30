@@ -168,7 +168,7 @@ const Toolbar = ({ editor }) => {
           onChange={(e) =>
             editor.chain().focus().setColor(e.target.value).run()
           }
-          className="cursor-pointer rounded-md px-[5px] pt-[11px]"
+          className="cursor-pointer rounded-md bg-slate-700 px-[5px] pt-[11px]"
           title="Text Color"
         />
       </div>
@@ -185,7 +185,7 @@ const Toolbar = ({ editor }) => {
               .toggleHighlight({ color: e.target.value })
               .run()
           }
-          className="cursor-pointer rounded-md px-[5px] pt-[11px]"
+          className="cursor-pointer rounded-md bg-slate-700 px-[5px] pt-[11px]"
           title="Text Highlight"
         />
       </div>
