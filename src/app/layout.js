@@ -1,6 +1,8 @@
 // src/app/layout.js
-import { Navbar } from "@/components";
+import { authOptions } from "@/auth/authOptions";
+import NavbarWrapper from "@/components/interface/NavbarWrapper";
 import { images } from "@/data";
+import { getServerSession } from "next-auth";
 import { Merriweather } from "next/font/google";
 import "../styles/globals.css";
 
@@ -14,38 +16,15 @@ export const metadata = {
   description: "Memorial Website",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <head>
         <link rel="icon" href={images.icon} sizes="any" />
       </head>
       <body className={merriweather.className}>
-        <Navbar
-          brand={{
-            name: "BD Heros",
-            logoSrc: images.logo,
-            logoAlt: "Logo",
-            href: "/",
-          }}
-          navItems={[
-            { label: "Home", href: "/" },
-            { label: "Protesters", href: "/protesters" },
-            { label: "Contribute", href: "/contribute" },
-            { label: "Contact", href: "/about" },
-          ]}
-          userMenuItems={[
-            { label: "Dashboard", href: "/dashboard" },
-            { label: "Settings", href: "/settings" },
-            { label: "Sign out", href: "/signout" },
-          ]}
-          showSearchBar={true}
-          userInfo={{
-            name: "Test User",
-            email: "user@test.com",
-            avatarSrc: images.icon,
-          }}
-        />
+        <NavbarWrapper session={session} />
         {children}
       </body>
     </html>
