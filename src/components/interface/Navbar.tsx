@@ -59,6 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               src={brand.logoSrc}
               className="h-8"
               alt={brand.logoAlt}
+              priority={true}
             />
           )}
           <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
