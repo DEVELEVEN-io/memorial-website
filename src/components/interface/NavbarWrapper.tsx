@@ -1,3 +1,4 @@
+// src/components/interface/NavbarWrapper.tsx
 import { Navbar } from "@/components/";
 import { images } from "@/data";
 

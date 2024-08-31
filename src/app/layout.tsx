@@ -1,4 +1,4 @@
-// src/app/layout.js
+// src/app/layout.tsx
 import NavbarProvider from "@/components/client/NavbarProvider";
 import SessionWrapper from "@/components/client/SessionWrapper";
 import { images } from "@/data";

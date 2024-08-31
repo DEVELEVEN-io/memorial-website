@@ -1,8 +1,9 @@
+// src/components/interface/Navbar.tsx
 "use client";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaBars, FaSearch } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 
 // Define the prop types
@@ -98,7 +99,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   width={32}
                   height={32}
                   src={userInfo.avatarSrc}
-                  alt="user photo"
+                  alt="User"
+                  priority={true}
                 />
               ) : (
                 <FaCircleUser className="h-8 w-8 text-gray-300" />
@@ -137,27 +139,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Hamburger Menu Button */}
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg p-1 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             aria-controls="navbar-user"
             aria-expanded={isNavOpen}
             onClick={toggleNav}
           >
             <span className="sr-only">Open main menu</span>
-            <svg
-              className="h-5 w-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
+            <FaBars className="text-2xl" />
           </button>
         </div>
 
