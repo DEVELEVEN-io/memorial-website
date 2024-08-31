@@ -14,7 +14,7 @@ export default function NavbarWrapper({ session }: { session: any }) {
   const userInfo = {
     name: session?.user?.name || "Guest User",
     email: session?.user?.email || "guest@example.com",
-    avatarSrc: session?.user?.image || null, // Use images.icon as default avatar
+    avatarSrc: session?.user?.image || null,
   };
 
   return (
