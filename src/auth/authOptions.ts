@@ -2,6 +2,7 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import { NextAuthOptions, Session, User } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import GoogleProvider from "next-auth/providers/google";
 
 const prisma = new PrismaClient();
@@ -15,10 +16,27 @@ export const authOptions: NextAuthOptions = {
   ],
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt", // Use JWT for session handling
+    maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
+  },
   callbacks: {
-    async session({ session, user }: { session: Session; user?: User }) {
-      if (user && session?.user) {
-        session.user.email = user.email;
+    async jwt({ token, user }: { token: JWT; user?: User }) {
+      if (user) {
+        token.name = user.name;
+        token.email = user.email;
+        token.picture = user.image;
+        console.log("JWT Token: ", token); // Debug
+      }
+      return token;
+    },
+
+    async session({ session, token }: { session: Session; token: JWT }) {
+      if (token && session?.user) {
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
+        console.log("Session Data: ", session); // Debug
       }
       return session;
     },

@@ -23,12 +23,13 @@ const Editor = () => {
       Link,
     ],
     content: "<p>Start typing from here.</p>",
+    immediatelyRender: false,
   });
 
   if (!editor) return null;
 
   return (
-    <div className="rounded-md border border-gray-300 bg-gray-50 editor-container dark:border-gray-700 dark:bg-gray-900">
+    <div className="editor-container rounded-md border border-gray-300 bg-gray-50 dark:border-gray-700 dark:bg-gray-900">
       <Toolbar editor={editor} />
       <div className="p-4">
         <EditorContent editor={editor} />
