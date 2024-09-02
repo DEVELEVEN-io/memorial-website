@@ -1,4 +1,5 @@
-import { SkeletonCard } from "@/components/skeleton/SkeletonCard";
+// src/app/loading.tsx
+
 export default function Loading() {
-  return <SkeletonCard />;
+  return <div>Loading...</div>;
 }
