@@ -1,27 +1,20 @@
 // src/app/page.tsx
-"use client";
 
-import { useEffect, useState } from "react";
+async function fetchPosts() {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/getPost`, {
+    cache: "no-store", // Ensure the response isn't cached
+  });
 
-export default function Main() {
-  const [posts, setPosts] = useState([]);
+  if (!response.ok) {
+    throw new Error("Failed to fetch posts");
+  }
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch("/api/getPost");
-        if (!response.ok) {
-          throw new Error("Failed to fetch posts");
-        }
-        const data = await response.json();
-        setPosts(data);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
+  return response.json();
+}
 
-    fetchPosts();
-  }, []);
+export default async function Main() {
+  const posts = await fetchPosts();
 
   return (
     <div className="container mx-auto px-4">
