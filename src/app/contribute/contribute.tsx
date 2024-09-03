@@ -61,7 +61,7 @@ export default function Contribute() {
           throw new Error("Failed to create post");
         }
 
-        router.push("/contribute");
+        router.push("/");
       } catch (error) {
         console.error("Error creating post:", error);
       }
