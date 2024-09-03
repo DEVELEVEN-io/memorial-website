@@ -1,31 +1,15 @@
 // src/components/ui/Editor.tsx
 "use client";
 import "@/styles/editor.css";
-import { Color } from "@tiptap/extension-color";
-import { Highlight } from "@tiptap/extension-highlight";
-import Link from "@tiptap/extension-link";
-import TextStyle from "@tiptap/extension-text-style";
-import Underline from "@tiptap/extension-underline";
-import { EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { Editor as TiptapEditor } from "@tiptap/core"; // Import the base Editor type if needed
+import { EditorContent } from "@tiptap/react";
 import Toolbar from "./Toolbar";
 
-const Editor = () => {
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Underline,
-      TextStyle,
-      Color.configure({ types: ["textStyle"] }),
-      Highlight.configure({
-        multicolor: true,
-      }),
-      Link,
-    ],
-    content: "<p>Start typing from here.</p>",
-    immediatelyRender: false,
-  });
+interface EditorProps {
+  editor: TiptapEditor | null; // Use TiptapEditor type for better type checking
+}
 
+const Editor = ({ editor }: EditorProps) => {
   if (!editor) return null;
 
   return (
