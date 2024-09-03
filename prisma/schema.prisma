@@ -15,34 +15,24 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // Optional for WebAuthn support
-  Authenticator Authenticator[]
+  authenticator Authenticator[] // Optional for WebAuthn support
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  // Relation to the UserPost table
-  posts UserPost[] // A user can have many posts
+  posts         Post[] // A user can have many posts
 }
 
-model Region {
-  id    String       @id @default(cuid())
-  name  String       @unique
-  // Relation to UserPost table
-  userPosts UserPost[] // A region can have many posts
+model Post {
+  id        String     @id @default(cuid())
+  title     String
+  content   String
+  slug      String     @unique // This creates a unique constraint for the slug field
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model UserPost {
-  id       String @id @default(cuid())
-  userId   String
-  postId   String
-  content  String // Field for post content
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  region Region @relation(fields: [postId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, postId]) // Composite key to ensure uniqueness
-}
 
 model Account {
   userId            String
@@ -72,7 +62,7 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model VerificationToken {
