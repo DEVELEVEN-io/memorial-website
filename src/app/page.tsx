@@ -1,9 +1,10 @@
 // src/app/page.tsx
 
+// Define how often to revalidate the static page
+export const revalidate = 60; // Revalidate every 60 seconds
+
 async function fetchPosts() {
-  // Use environment variable for base URL in production
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-  // Fetch posts with no cache
   const response = await fetch(`${baseUrl}/api/getPost`, {
     cache: "no-store", // Ensures the response isn't cached
   });
@@ -43,7 +44,6 @@ export default async function Main() {
       </div>
     );
   } catch (error) {
-    // Handle errors gracefully
     return (
       <div className="container mx-auto px-4">
         <h2 className="mb-4 text-xl">Posts:</h2>
