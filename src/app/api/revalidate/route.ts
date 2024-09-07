@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   // Perform any necessary authorization or validation checks here
 
   // Invalidate the cache for the specified path
-  revalidatePath("/"); // Adjust path as needed
+  revalidatePath("/");
 
   return NextResponse.json({ message: "Cache revalidation triggered" });
 }

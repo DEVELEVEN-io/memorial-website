@@ -1,10 +1,4 @@
-import { revalidatePath } from "next/cache";
-
-// This is a Server Action
-export async function revalidatePage() {
-  // Trigger revalidation
-  revalidatePath("/");
-}
+// src/app/page.tsx
 
 async function fetchPosts() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;

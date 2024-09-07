@@ -1,5 +1,6 @@
 // src/app/api/createPost/route.ts
 import { createPost } from "@/actions/actions";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -14,8 +15,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Call the server-side function
+    // Call the server-side function to create a new post
     const post = await createPost(title, content, userEmail);
+
+    // Trigger revalidation of the homepage or relevant page
+    revalidatePath("/");
 
     return NextResponse.json(post);
   } catch (error) {
