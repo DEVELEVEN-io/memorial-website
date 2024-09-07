@@ -1,6 +1,6 @@
 // src/app/page.tsx
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 10; // Revalidate every 60 seconds
 
 async function fetchPosts() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
