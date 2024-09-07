@@ -1,10 +1,11 @@
 // src/app/page.tsx
 
 async function fetchPosts() {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-
+  // Use environment variable for base URL in production
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  // Fetch posts with no cache
   const response = await fetch(`${baseUrl}/api/getPost`, {
-    cache: "no-store", // Ensure the response isn't cached
+    cache: "no-store", // Ensures the response isn't cached
   });
 
   if (!response.ok) {
@@ -15,29 +16,41 @@ async function fetchPosts() {
 }
 
 export default async function Main() {
-  const posts = await fetchPosts();
+  try {
+    const posts = await fetchPosts();
 
-  return (
-    <div className="container mx-auto px-4">
-      <div>
-        <h2 className="mb-4 text-xl">Posts:</h2>
-        <ul className="editor-container space-y-4">
-          {posts.map((post) => (
-            <li key={post.id} className="rounded-md border p-4">
-              <h3 className="text-lg font-semibold">{post.title}</h3>
-              <div
-                dangerouslySetInnerHTML={{ __html: post.content }} // Render HTML content
-              />
-              <p className="text-sm text-gray-400">
-                By{" "}
-                <span className="text-blue-400">
-                  {post.user?.name || "Unknown"}
-                </span>
-              </p>
-            </li>
-          ))}
-        </ul>
+    return (
+      <div className="container mx-auto px-4">
+        <div>
+          <h2 className="mb-4 text-xl">Posts:</h2>
+          <ul className="editor-container space-y-4">
+            {posts.map((post) => (
+              <li key={post.id} className="rounded-md border p-4">
+                <h3 className="text-lg font-semibold">{post.title}</h3>
+                <div
+                  dangerouslySetInnerHTML={{ __html: post.content }} // Render HTML content
+                />
+                <p className="text-sm text-gray-400">
+                  By{" "}
+                  <span className="text-blue-400">
+                    {post.user?.name || "Unknown"}
+                  </span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } catch (error) {
+    // Handle errors gracefully
+    return (
+      <div className="container mx-auto px-4">
+        <h2 className="mb-4 text-xl">Posts:</h2>
+        <p className="text-red-500">
+          Failed to load posts. Please try again later.
+        </p>
+      </div>
+    );
+  }
 }
