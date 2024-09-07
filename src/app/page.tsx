@@ -1,12 +1,11 @@
 // src/app/page.tsx
 
-// Define how often to revalidate the static page
 export const revalidate = 60; // Revalidate every 60 seconds
 
 async function fetchPosts() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const response = await fetch(`${baseUrl}/api/getPost`, {
-    cache: "no-store", // Ensures the response isn't cached
+    cache: "no-store", // Ensure no caching for fetch requests
   });
 
   if (!response.ok) {
@@ -44,6 +43,7 @@ export default async function Main() {
       </div>
     );
   } catch (error) {
+    console.error("Error fetching posts:", error);
     return (
       <div className="container mx-auto px-4">
         <h2 className="mb-4 text-xl">Posts:</h2>
