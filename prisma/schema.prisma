@@ -30,6 +30,7 @@ model Post {
   slug      String     @unique // This creates a unique constraint for the slug field
   userId    String
   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime   @default(now())
 }
 
 

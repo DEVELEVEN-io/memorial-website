@@ -1,7 +1,7 @@
 // src/app/page.tsx
 
 async function fetchPosts() {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  const baseUrl = "http://localhost:3000" || process.env.NEXT_PUBLIC_API_URL;
   const response = await fetch(`${baseUrl}/api/getPost`, {
     cache: "no-store", // Ensure the response isn't cached
   });
