@@ -1,6 +1,10 @@
-// src/app/page.tsx
+import { revalidatePath } from "next/cache";
 
-export const revalidate = 10; // Revalidate every 60 seconds
+// This is a Server Action
+export async function revalidatePage() {
+  // Trigger revalidation
+  revalidatePath("/");
+}
 
 async function fetchPosts() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
