@@ -1,13 +1,10 @@
 // src/app/page.tsx
 
 async function fetchPosts() {
-  // const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-  const response = await fetch(
-    "https://memorial-website-three.vercel.app/api/getPost",
-    {
-      cache: "no-store",
-    },
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const response = await fetch(`${baseUrl}/api/getPost`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch posts");

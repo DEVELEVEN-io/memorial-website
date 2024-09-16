@@ -1,6 +1,6 @@
 // src/app/api/createPost/route.ts
 import { createPost } from "@/actions/actions";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -18,9 +18,9 @@ export async function POST(request: Request) {
     // Call the server-side function to create a new post
     const post = await createPost(title, content, userEmail);
 
-    // Trigger revalidation of the homepage or relevant page
-    revalidatePath("/");
-    revalidateTag("/api/getPost");
+    // Revalidate the list of posts to ensure the cache updates
+    revalidatePath("/"); // Assuming your homepage lists the posts
+    revalidatePath("/api/getPost"); // Ensure the API route is also updated
 
     return NextResponse.json(post);
   } catch (error) {
