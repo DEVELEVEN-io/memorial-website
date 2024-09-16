@@ -3,7 +3,7 @@
 async function fetchPosts() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const response = await fetch(`${baseUrl}/api/getPost`, {
-    cache: "no-store", // Ensure no caching for fetch requests
+    cache: "no-store",
   });
 
   if (!response.ok) {

@@ -4,7 +4,6 @@ const nextConfig = {
     domains: ["lh3.googleusercontent.com"], // Add other domains if needed
   },
   experimental: {
-    appDir: true,
     serverComponentsExternalPackages: ["@prisma/client"],
   },
 };
