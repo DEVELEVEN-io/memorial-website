@@ -1,6 +1,6 @@
 // src/app/api/createPost/route.ts
 import { createPost } from "@/actions/actions";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -20,6 +20,7 @@ export async function POST(request: Request) {
 
     // Trigger revalidation of the homepage or relevant page
     revalidatePath("/");
+    revalidateTag("/api/getPost");
 
     return NextResponse.json(post);
   } catch (error) {
