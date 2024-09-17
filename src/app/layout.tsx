@@ -1,12 +1,10 @@
 // src/app/layout.tsx
 import { authOptions } from "@/auth/authOptions";
 import NavbarWrapper from "@/components/interface/NavbarWrapper";
+import { images } from "@/data";
 import { getServerSession } from "next-auth";
 import { Merriweather } from "next/font/google";
 import "../styles/globals.css";
-// import NavbarProvider from "@/components/client/NavbarProvider";
-// import SessionWrapper from "@/components/client/SessionWrapper";
-import { images } from "@/data";
 
 const merriweather = Merriweather({
   weight: ["300", "400", "700", "900"],
@@ -18,7 +16,6 @@ export const metadata = {
   description: "Memorial Website",
 };
 
-// export default function RootLayout({ children }) { // old approach
 export default async function RootLayout({
   children,
 }: {
@@ -33,11 +30,6 @@ export default async function RootLayout({
       <body className={merriweather.className}>
         <NavbarWrapper session={session} />
         {children}
-
-        {/* <SessionWrapper> // old approach
-          <NavbarProvider />
-          {children}
-        </SessionWrapper> */}
       </body>
     </html>
   );
