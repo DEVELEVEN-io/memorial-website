@@ -10,6 +10,7 @@ interface ButtonProps {
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   place?: "start" | "end";
+  type?: "button" | "submit" | "reset";
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -21,6 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled = false,
   onClick,
   place = "start",
+  type = "button", // Default to "button"
 }) => {
   const sizeClasses = {
     small: "px-2 py-1 text-sm",
@@ -37,6 +39,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      type={type} // Use type here
       className={`btn flex items-center justify-center rounded-md ${sizeClasses[size]} ${colorClasses[color]} ${className} ${
         disabled ? "cursor-not-allowed opacity-50" : ""
       }`}

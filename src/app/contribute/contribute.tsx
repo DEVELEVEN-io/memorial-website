@@ -96,6 +96,7 @@ export default function Contribute() {
         place="end"
         size="large"
         color="primary"
+        type="submit"
         icon=<MdOutlinePostAdd />
         onClick={() => console.log("Button clicked!")}
       />

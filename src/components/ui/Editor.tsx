@@ -1,12 +1,12 @@
 // src/components/ui/Editor.tsx
 "use client";
 import "@/styles/editor.css";
-import { Editor as TiptapEditor } from "@tiptap/core"; // Import the base Editor type if needed
+import { Editor as TiptapEditor } from "@tiptap/core";
 import { EditorContent } from "@tiptap/react";
 import Toolbar from "./Toolbar";
 
 interface EditorProps {
-  editor: TiptapEditor | null; // Use TiptapEditor type for better type checking
+  editor: TiptapEditor | null;
 }
 
 const Editor = ({ editor }: EditorProps) => {
