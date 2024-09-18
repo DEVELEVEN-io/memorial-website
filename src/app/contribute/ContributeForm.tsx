@@ -1,4 +1,4 @@
-// src/components/Contribute.tsx
+// src/app/contribute/ContributeForm.tsx
 "use client";
 
 import { Button, Editor } from "@/components";
@@ -14,12 +14,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { MdOutlinePostAdd } from "react-icons/md";
 
-export default function Contribute() {
+export default function ContributeForm() {
   const [title, setTitle] = useState("");
   const router = useRouter();
-  const { data: session, status } = useSession(); // Get session data
+  const { data: session, status } = useSession();
 
-  // Initialize the editor
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -44,8 +43,7 @@ export default function Contribute() {
       console.log("User Email:", session.user.email);
 
       try {
-        // Call the server-side function from the client
-        const post = await fetch("/api/createPost", {
+        const response = await fetch("/api/createPost", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -57,7 +55,7 @@ export default function Contribute() {
           }),
         });
 
-        if (!post.ok) {
+        if (!response.ok) {
           throw new Error("Failed to create post");
         }
 
@@ -72,7 +70,7 @@ export default function Contribute() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center">
-      <div className="flex flex-col">
+      <div className="mb-6 flex flex-col">
         <label htmlFor="title" className="text-xl font-semibold">
           Title:
         </label>
@@ -88,16 +86,15 @@ export default function Contribute() {
         />
       </div>
       <div className="my-6">
-        <Editor editor={editor} /> {/* Pass the editor instance */}
+        <Editor editor={editor} />
       </div>
-
       <Button
         text="Create Post"
         place="end"
         size="large"
         color="primary"
         type="submit"
-        icon=<MdOutlinePostAdd />
+        icon={<MdOutlinePostAdd />}
         onClick={() => console.log("Button clicked!")}
       />
     </form>
