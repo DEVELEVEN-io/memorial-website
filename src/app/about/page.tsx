@@ -8,12 +8,10 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 
-// Simulate a delay using a promise
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default async function About() {
-  // Introduce a delay of 2 seconds
-  await delay(1000);
+  // await delay(300);
 
   return (
     <div>
