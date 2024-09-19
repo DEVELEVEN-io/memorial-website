@@ -15,7 +15,9 @@ const nextConfig = {
           {
             key: "Access-Control-Allow-Origin",
             value:
-              "https://memorial-website-three.vercel.app/api/auth/callback/github/",
+              process.env.NODE_ENV === "production"
+                ? "https://memorial-website-three.vercel.app"
+                : "http://localhost:3000", // Allow localhost in development
           },
           {
             key: "Access-Control-Allow-Methods",
@@ -25,6 +27,10 @@ const nextConfig = {
             key: "Access-Control-Allow-Headers",
             value:
               "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+          {
+            key: "Access-Control-Max-Age",
+            value: "86400", // Cache preflight response for 24 hours
           },
         ],
       },
