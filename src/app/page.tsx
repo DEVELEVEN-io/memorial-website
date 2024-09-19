@@ -27,18 +27,19 @@ export default async function Main() {
                 key={post.id}
                 className="rounded-md border border-gray-700 p-4"
               >
-                <h3 className="mb-4 text-3xl font-semibold">{post.title}</h3>
-                <hr className="mb-6 mt-1 h-px border-0 bg-gray-200 dark:bg-gray-700" />
-                <div
-                  dangerouslySetInnerHTML={{ __html: post.content }} // Render HTML content
-                />
-                <hr className="mb-2 mt-4 h-px border-0 bg-gray-200 dark:bg-gray-700" />
+                <h3 className="mb-2 text-3xl font-semibold">{post.title}</h3>
+
                 <p className="text-sm text-gray-400">
                   By{" "}
                   <span className="cursor-pointer text-blue-400">
                     {post.user?.name || "Unknown"}
                   </span>
                 </p>
+                {/* <hr className="mb-2 mt-4 h-px border-0 bg-gray-200 dark:bg-gray-700" /> */}
+                <hr className="mb-6 mt-2 h-px border-0 bg-gray-200 dark:bg-gray-700" />
+                <div
+                  dangerouslySetInnerHTML={{ __html: post.content }} // Render HTML content
+                />
               </li>
             ))}
           </ul>
