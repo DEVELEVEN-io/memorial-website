@@ -3,6 +3,7 @@ import { Navbar } from "@/components/";
 import { images } from "@/data";
 
 export default function NavbarWrapper({ session }: { session: any }) {
+  // Define user menu items based on whether the session contains user data
   const userMenuItems = session?.user
     ? [
         { label: "Dashboard", href: "/dashboard" },
@@ -11,11 +12,14 @@ export default function NavbarWrapper({ session }: { session: any }) {
       ]
     : [{ label: "Sign in", href: "/api/auth/signin" }];
 
-  const userInfo = {
-    name: session?.user?.name || "Guest User",
-    email: session?.user?.email || "guest@example.com",
-    avatarSrc: session?.user?.image || null,
-  };
+  // Define user info, fallback to default values if no session
+  const userInfo = session?.user
+    ? {
+        name: session.user.name,
+        email: session.user.email,
+        avatarSrc: session.user.image,
+      }
+    : null; // Return `null` when no user session exists
 
   return (
     <Navbar
