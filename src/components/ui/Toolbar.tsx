@@ -1,3 +1,4 @@
+// src/components/ui/Toolbar.tsx
 import "@/styles/editor.css";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -88,6 +89,7 @@ const Toolbar = ({ editor }) => {
     <div className="flex items-center space-x-2 rounded-t-md bg-gray-200 p-2 dark:bg-gray-800">
       <div className="relative">
         <button
+          type="button"
           onClick={toggleDropdown}
           className="flex items-center rounded-md bg-gray-300 p-2 dark:bg-gray-600"
         >
@@ -96,36 +98,42 @@ const Toolbar = ({ editor }) => {
         {isDropdownOpen && (
           <div className="absolute z-10 mt-2 w-48 rounded-md border border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-700">
             <button
+              type="button"
               onClick={() => applyHeading(1)}
               className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
               <LuHeading1 className="mr-2 text-xl" /> Heading 1
             </button>
             <button
+              type="button"
               onClick={() => applyHeading(2)}
               className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
               <LuHeading2 className="mr-2 text-xl" /> Heading 2
             </button>
             <button
+              type="button"
               onClick={() => applyHeading(3)}
               className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
               <LuHeading3 className="mr-2 text-xl" /> Heading 3
             </button>
             <button
+              type="button"
               onClick={() => applyList("bullet")}
               className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
               <LuList className="mr-2 text-xl" /> Bullet list
             </button>
             <button
+              type="button"
               onClick={() => applyList("ordered")}
               className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
               <LuListOrdered className="mr-2 text-xl" /> Numbered list
             </button>
             <button
+              type="button"
               onClick={() => applyList("paragraph")}
               className="flex w-full flex-row items-center px-4 py-2 text-left text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-600"
             >
@@ -136,7 +144,11 @@ const Toolbar = ({ editor }) => {
       </div>
 
       <button
-        onClick={() => editor.chain().focus().toggleBold().run()}
+        type="button"
+        onClick={(e) => {
+          e.preventDefault(); // Prevent unintended behavior
+          editor.chain().focus().toggleBold().run();
+        }}
         className={`rounded-md p-2 ${
           editor.isActive("bold") ? "bg-gray-300 dark:bg-gray-600" : ""
         }`}
@@ -144,6 +156,7 @@ const Toolbar = ({ editor }) => {
         <FaBold />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={`rounded-md p-2 ${
           editor.isActive("italic") ? "bg-gray-300 dark:bg-gray-600" : ""
@@ -152,6 +165,7 @@ const Toolbar = ({ editor }) => {
         <FaItalic />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleUnderline().run()}
         className={`rounded-md p-2 ${
           editor.isActive("underline") ? "bg-gray-300 dark:bg-gray-600" : ""
@@ -191,6 +205,7 @@ const Toolbar = ({ editor }) => {
       </div>
 
       <button
+        type="button"
         onClick={() => setIsLinkModalOpen(true)}
         className="rounded-md p-2"
         title="Add Link"
@@ -228,6 +243,7 @@ const Toolbar = ({ editor }) => {
             </span>
           </label>
           <button
+            type="button"
             onClick={handleSetLink}
             className="w-full rounded-md bg-gray-300 p-2 dark:bg-gray-600"
           >

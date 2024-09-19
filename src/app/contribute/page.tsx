@@ -1,11 +1,13 @@
 // src/app/contribute/page.tsx
 import SessionWrapper from "@/components/client/SessionWrapper";
-import Contribute from "./contribute";
+import ContributeForm from "./ContributeForm";
 
-export default function ContributePage() {
+export default async function ContributePage() {
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
+
   return (
     <SessionWrapper>
-      <Contribute />
+      <ContributeForm />
     </SessionWrapper>
   );
 }

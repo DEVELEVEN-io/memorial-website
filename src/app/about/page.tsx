@@ -1,5 +1,5 @@
+// src/app/about/page.tsx
 import AuthButton from "@/components/ui/AuthButton";
-import React from "react";
 import {
   FaApple,
   FaFacebookF,
@@ -8,7 +8,11 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 
-const About: React.FC = () => {
+// const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export default async function About() {
+  // await delay(300);
+
   return (
     <div>
       <AuthButton
@@ -53,6 +57,4 @@ const About: React.FC = () => {
       />
     </div>
   );
-};
-
-export default About;
+}
