@@ -19,21 +19,27 @@ export default async function Main() {
 
     return (
       <div className="container mx-auto px-4">
-        <div>
-          <h2 className="mb-4 text-xl">Posts:</h2>
+        <div className="mt-4">
+          <h2 className="mb-2 text-2xl font-semibold">Posts:</h2>
           <ul className="editor-container space-y-4">
             {posts.map((post) => (
-              <li key={post.id} className="rounded-md border p-4">
-                <h3 className="text-lg font-semibold">{post.title}</h3>
-                <div
-                  dangerouslySetInnerHTML={{ __html: post.content }} // Render HTML content
-                />
+              <li
+                key={post.id}
+                className="rounded-md border border-gray-700 p-4"
+              >
+                <h3 className="mb-2 text-3xl font-semibold">{post.title}</h3>
+
                 <p className="text-sm text-gray-400">
                   By{" "}
-                  <span className="text-blue-400">
+                  <span className="cursor-pointer text-blue-400">
                     {post.user?.name || "Unknown"}
                   </span>
                 </p>
+                {/* <hr className="mb-2 mt-4 h-px border-0 bg-gray-200 dark:bg-gray-700" /> */}
+                <hr className="mb-6 mt-2 h-px border-0 bg-gray-200 dark:bg-gray-700" />
+                <div
+                  dangerouslySetInnerHTML={{ __html: post.content }} // Render HTML content
+                />
               </li>
             ))}
           </ul>

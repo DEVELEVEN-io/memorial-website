@@ -1,7 +1,13 @@
-// src/app/api/auth/signin/page.tsx
-
 "use client";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
@@ -15,56 +21,52 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+    <div className="flex min-h-screen items-center justify-center bg-gray-800 px-4 py-12 sm:px-6 lg:px-8">
+      <Card className="w-full max-w-md border-gray-600 bg-slate-700">
+        <CardHeader>
+          <CardTitle className="text-center text-3xl font-extrabold text-blue-50">
             Sign In
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          </CardTitle>
+          <CardDescription className="pt-2 text-center text-gray-300">
             Choose your preferred sign in method
-          </p>
-        </div>
-        <div className="mt-8 space-y-6">
-          <div className="-space-y-px rounded-md shadow-sm">
-            <button
-              onClick={() => handleSignIn("google")}
-              disabled={loadingProvider !== null}
-              className="group relative flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
-            >
-              {loadingProvider === "google" ? (
-                "Loading..."
-              ) : (
-                <>
-                  <FaGoogle className="mr-2 h-4 w-4" aria-hidden="true" />
-                  Sign in with Google
-                </>
-              )}
-            </button>
-          </div>
-          <div>
-            <button
-              onClick={() => handleSignIn("github")}
-              disabled={loadingProvider !== null}
-              className="group relative flex w-full items-center justify-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50"
-            >
-              {loadingProvider === "github" ? (
-                "Loading..."
-              ) : (
-                <>
-                  <FaGithub className="mr-2 h-4 w-4" aria-hidden="true" />
-                  Sign in with GitHub
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-        <div className="text-center">
-          <p className="mt-2 text-sm text-gray-600">
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <button
+            onClick={() => handleSignIn("google")}
+            disabled={loadingProvider !== null}
+            className="group relative flex w-full items-center justify-center rounded-md border border-transparent bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+          >
+            {loadingProvider === "google" ? (
+              "Loading..."
+            ) : (
+              <>
+                <FaGoogle className="mr-2 h-4 w-4" aria-hidden="true" />
+                Sign in with Google
+              </>
+            )}
+          </button>
+          <button
+            onClick={() => handleSignIn("github")}
+            disabled={loadingProvider !== null}
+            className="group relative flex w-full items-center justify-center rounded-md border border-transparent bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+          >
+            {loadingProvider === "github" ? (
+              "Loading..."
+            ) : (
+              <>
+                <FaGithub className="mr-2 h-4 w-4" aria-hidden="true" />
+                Sign in with GitHub
+              </>
+            )}
+          </button>
+        </CardContent>
+        <CardFooter>
+          <p className="mx-auto text-xs text-gray-400">
             By signing in, you agree to our Terms of Service.
           </p>
-        </div>
-      </div>
+        </CardFooter>
+      </Card>
     </div>
   );
 }

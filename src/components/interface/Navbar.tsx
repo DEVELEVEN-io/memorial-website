@@ -4,7 +4,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { FaBars, FaSearch } from "react-icons/fa";
-import { FaCircleUser } from "react-icons/fa6";
+import { Button } from "../ui/Button";
 
 // Define the prop types
 interface NavbarProps {
@@ -94,7 +94,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               aria-expanded={isDropdownOpen}
             >
               <span className="sr-only">Open user menu</span>
-              {userInfo.avatarSrc ? (
+              {userInfo ? (
                 <Image
                   className="h-8 w-8 rounded-full"
                   width={32}
@@ -104,36 +104,48 @@ export const Navbar: React.FC<NavbarProps> = ({
                   priority={true}
                 />
               ) : (
-                <FaCircleUser className="h-8 w-8 text-gray-300" />
+                <div></div> // Render nothing if no userInfo
               )}
             </button>
 
-            {isDropdownOpen && (
-              <div
-                className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700"
-                id="user-dropdown"
-              >
-                <div className="px-4 py-3">
-                  <span className="block text-sm text-gray-900 dark:text-white">
-                    {userInfo.name || "Guest"}
-                  </span>
-                  <span className="block truncate text-sm text-gray-500 dark:text-gray-400">
-                    {userInfo.email || "guest@example.com"}
-                  </span>
+            {/* Only render dropdown if userInfo exists */}
+            {userInfo ? (
+              isDropdownOpen && (
+                <div
+                  className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700"
+                  id="user-dropdown"
+                >
+                  <div className="px-4 py-3">
+                    <span className="block text-sm text-gray-900 dark:text-white">
+                      {userInfo.name || "User"}
+                    </span>
+                    <span className="block truncate text-sm text-gray-500 dark:text-gray-400">
+                      {userInfo.email || "user@example.com"}
+                    </span>
+                  </div>
+                  <ul className="py-2" aria-labelledby="user-menu-button">
+                    {userMenuItems.map((item, index) => (
+                      <li key={index}>
+                        <a
+                          href={item.href}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          {item.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="py-2" aria-labelledby="user-menu-button">
-                  {userMenuItems.map((item, index) => (
-                    <li key={index}>
-                      <a
-                        href={item.href}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        {item.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              )
+            ) : (
+              <a href="/api/auth/signin" className="">
+                <Button
+                  text="Sign In"
+                  className="w-30 m-0 bg-indigo-600 p-0 text-sm hover:bg-indigo-500"
+                  place="end"
+                  icon={null}
+                ></Button>
+              </a>
             )}
           </div>
 
