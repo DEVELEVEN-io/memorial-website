@@ -62,9 +62,8 @@ export default function SignIn() {
           </button>
         </CardContent>
         <CardFooter>
-          <p className="flex text-center text-xs text-gray-400">
-            By signing in, you agree to our Terms of Service. Note: I have not
-            implemented GitHub Provider yet.
+          <p className="mx-auto text-xs text-gray-400">
+            By signing in, you agree to our Terms of Service.
           </p>
         </CardFooter>
       </Card>
